@@ -29,10 +29,7 @@ public class ProjectController {
     ProjectDtoFactory projectDtoFactory;
 
     public static final String FETCH_PROJECTS = "/api/projects";
-    public static final String CREATE_PROJECT = "/api/projects";
-    public static final String EDIT_PROJECT = "/api/projects/{project_id}";
     public static final String DELETE_PROJECT = "/api/projects/{project_id}";
-
     public static final String CREATE_OR_UPDATE_PROJECT = "/api/projects";
 
     @Transactional(readOnly = true)
@@ -44,7 +41,7 @@ public class ProjectController {
 
         Stream<ProjectEntity> projectStream = optionalPrefixName
                 .map(projectRepository::streamAllByNameStartsWithIgnoreCase)
-                .orElseGet(projectRepository::streamAll);
+                .orElseGet(projectRepository::streamAllBy);
 
         return projectStream.map(projectDtoFactory::makeProjectDto)
                 .collect(Collectors.toList());
