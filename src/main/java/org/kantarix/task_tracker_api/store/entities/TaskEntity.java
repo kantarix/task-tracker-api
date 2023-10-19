@@ -2,6 +2,7 @@ package org.kantarix.task_tracker_api.store.entities;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.springframework.scheduling.config.Task;
 
 import javax.persistence.*;
 import java.time.Instant;
@@ -22,11 +23,17 @@ public class TaskEntity {
 
     String name;
 
-    String description;
+    @Builder.Default
+    String description = "";
 
-    Long ordinal;
+    @Builder.Default
+    @Enumerated(EnumType.STRING)
+    TaskState state = TaskState.TODO;
 
     @Builder.Default
     Instant createdAt = Instant.now();
+
+    @Builder.Default
+    Instant updatedAt = Instant.now();
 
 }

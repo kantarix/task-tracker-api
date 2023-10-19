@@ -1,36 +1,15 @@
 package org.kantarix.task_tracker_api.api.controllers;
 
-import lombok.AccessLevel;
-import lombok.RequiredArgsConstructor;
-import lombok.experimental.FieldDefaults;
-import org.kantarix.task_tracker_api.api.dto.AskDto;
-import org.kantarix.task_tracker_api.api.dto.ProjectDto;
-import org.kantarix.task_tracker_api.api.exceptions.BadRequestException;
-import org.kantarix.task_tracker_api.api.exceptions.NotFoundException;
-import org.kantarix.task_tracker_api.api.factories.ProjectDtoFactory;
-import org.kantarix.task_tracker_api.store.entities.ProjectEntity;
-import org.kantarix.task_tracker_api.store.repositories.ProjectRepository;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-@RequiredArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-@Transactional
-@RestController
 public class ProjectController {
 
-    ProjectRepository projectRepository;
+    /*ProjectRepository projectRepository;
     ProjectDtoFactory projectDtoFactory;
 
-    public static final String FETCH_PROJECTS = "/api/projects";
-    public static final String DELETE_PROJECT = "/api/projects/{project_id}";
-    public static final String CREATE_OR_UPDATE_PROJECT = "/api/projects";
+    ControllerHelper controllerHelper;
+
+    public static final String FETCH_PROJECTS = "/projects";
+    public static final String DELETE_PROJECT = "/projects/{project_id}";
+    public static final String CREATE_OR_UPDATE_PROJECT = "/projects";
 
     @Transactional(readOnly = true)
     @GetMapping(FETCH_PROJECTS)
@@ -62,7 +41,7 @@ public class ProjectController {
         }
 
         final ProjectEntity project = optionalProjectId
-                .map(this::getProjectOrThrowException)
+                .map(controllerHelper::getProjectOrThrowException)
                 .orElseGet(() -> ProjectEntity.builder().build());
 
         optionalProjectName.ifPresent(projectName -> {
@@ -84,19 +63,11 @@ public class ProjectController {
     @DeleteMapping(DELETE_PROJECT)
     public AskDto deleteProject(@PathVariable(name = "project_id") Long projectId) {
 
-        getProjectOrThrowException(projectId);
+        controllerHelper.getProjectOrThrowException(projectId);
 
         projectRepository.deleteById(projectId);
 
         return AskDto.makeDefault(true);
     }
-
-    private ProjectEntity getProjectOrThrowException(Long projectId) {
-        return projectRepository
-                .findById(projectId)
-                .orElseThrow(() ->
-                        new NotFoundException(String.format("Project with id %d doesn't exist.", projectId))
-                );
-    }
-
+*/
 }
